@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agents in the Wild</title>
+<style>
+  :root {
+    --accent: #2563eb;
+    --bg: #fafafa;
+    --card: #ffffff;
+    --text: #1e293b;
+    --muted: #64748b;
+    --border: #e2e8f0;
+    --danger: #dc2626;
+    --warn: #d97706;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.65;
+  }
+
+  /* ---- hero ---- */
+  .hero {
+    text-align: center;
+    padding: 60px 24px 40px;
+    background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 100%);
+    color: #fff;
+  }
+  .hero h1 { font-size: 2.4rem; font-weight: 700; letter-spacing: -0.5px; }
+  .hero .subtitle {
+    margin-top: 8px;
+    font-size: 1.1rem;
+    opacity: .88;
+    max-width: 680px;
+    margin-left: auto; margin-right: auto;
+  }
+  .hero .authors {
+    margin-top: 18px;
+    font-size: 0.95rem;
+    opacity: .78;
+  }
+  .hero .links {
+    margin-top: 22px;
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .hero .links a {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 9px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.92rem;
+    text-decoration: none;
+    transition: opacity .15s;
+  }
+  .hero .links a:hover { opacity: .85; }
+  .btn-paper { background: #fff; color: var(--accent); }
+  .btn-code  { background: rgba(255,255,255,.18); color: #fff; border: 1px solid rgba(255,255,255,.35); }
+  .btn-data  { background: rgba(255,255,255,.18); color: #fff; border: 1px solid rgba(255,255,255,.35); }
+
+  /* ---- container ---- */
+  .container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+
+  /* ---- stats banner ---- */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 16px;
+    margin: -32px auto 0;
+    max-width: 780px;
+    padding: 0 24px;
+    position: relative;
+    z-index: 1;
+  }
+  .stat-card {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 18px 14px;
+    text-align: center;
+    box-shadow: 0 2px 12px rgba(0,0,0,.08);
+  }
+  .stat-card .num { font-size: 1.6rem; font-weight: 700; color: var(--accent); }
+  .stat-card .label { font-size: 0.78rem; color: var(--muted); margin-top: 2px; }
+
+  /* ---- sections ---- */
+  section { padding: 48px 0; }
+  section h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: var(--text);
+  }
+  section p, section li {
+    color: var(--muted);
+    font-size: 0.97rem;
+    max-width: 780px;
+  }
+
+  /* ---- issue cards ---- */
+  .issues-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 18px;
+    margin-top: 24px;
+  }
+  .issue-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 1px 6px rgba(0,0,0,.04);
+    border-left: 4px solid var(--accent);
+  }
+  .issue-card.danger { border-left-color: var(--danger); }
+  .issue-card.warn   { border-left-color: var(--warn); }
+  .issue-card h3 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: var(--text);
+  }
+  .issue-card p {
+    font-size: 0.85rem;
+    line-height: 1.55;
+    color: var(--muted);
+  }
+
+  /* ---- figure cards ---- */
+  .fig {
+    margin: 32px 0;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 1px 6px rgba(0,0,0,.04);
+  }
+  .fig img { width: 100%; display: block; }
+  .fig figcaption {
+    padding: 14px 20px;
+    font-size: 0.88rem;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+  }
+  .fig figcaption strong { color: var(--text); }
+
+  /* ---- abstract ---- */
+  .abstract-text {
+    font-size: 0.97rem;
+    color: #475569;
+    line-height: 1.75;
+    max-width: 780px;
+  }
+
+  /* ---- citation ---- */
+  .cite-box {
+    background: #f1f5f9;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px 22px;
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.8rem;
+    line-height: 1.65;
+    white-space: pre-wrap;
+    overflow-x: auto;
+    color: #334155;
+  }
+
+  /* ---- acknowledgment ---- */
+  .ack {
+    font-size: 0.92rem;
+    color: var(--muted);
+    line-height: 1.7;
+    max-width: 780px;
+  }
+  .ack a { color: var(--accent); text-decoration: none; }
+  .ack a:hover { text-decoration: underline; }
+
+  /* ---- footer ---- */
+  footer {
+    text-align: center;
+    padding: 32px 24px;
+    font-size: 0.82rem;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+  }
+
+  @media (max-width: 600px) {
+    .hero h1 { font-size: 1.6rem; }
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .issues-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ========== HERO ========== -->
+<header class="hero">
+  <h1>Agents in the Wild</h1>
+  <p class="subtitle">Safety, Society, and the Illusion of Sociality on Moltbook</p>
+  <p class="authors">
+    Yunbei Zhang &middot; Kai Mei &middot; Ming Liu &middot; Janet Wang &middot;
+    Dimitris N.&nbsp;Metaxas &middot; Xiao Wang &middot; Jihun Hamm &middot; Yingqiang Ge
+  </p>
+  <div class="links">
+    <a class="btn-paper" href="https://doi.org/10.5281/zenodo.18574027">Paper</a>
+    <a class="btn-code"  href="https://github.com/yunbeizhang/agents-in-the-wild">Code</a>
+    <a class="btn-data"  href="https://huggingface.co/datasets/SimulaMet/moltbook-observatory-archive">Dataset</a>
+  </div>
+</header>
+
+<!-- ========== STATS ========== -->
+<div class="stats">
+  <div class="stat-card"><div class="num">27,269</div><div class="label">AI Agents</div></div>
+  <div class="stat-card"><div class="num">137K</div><div class="label">Posts</div></div>
+  <div class="stat-card"><div class="num">346K</div><div class="label">Comments</div></div>
+  <div class="stat-card"><div class="num">3,790</div><div class="label">Communities</div></div>
+  <div class="stat-card"><div class="num">9</div><div class="label">Days Observed</div></div>
+</div>
+
+<!-- ========== OVERVIEW ========== -->
+<section>
+  <div class="container">
+    <h2>Overview</h2>
+    <p class="abstract-text">
+      We present the first large-scale empirical study of <strong>Moltbook</strong>, an AI-only social media
+      platform where 27,269 autonomous agents produced 137,485 posts and 345,580 comments over
+      nine days in January&ndash;February 2026. Despite being entirely non-human, the platform
+      rapidly developed governance structures, economic systems, tribal identities, and emotional
+      support networks&mdash;while simultaneously revealing critical safety failures including
+      25,000+ credential leaks, cryptocurrency pump-and-dump schemes involving 55% of all posts,
+      and 13.7% of agents operating as coordinated puppet clusters.
+    </p>
+  </div>
+</section>
+
+<!-- ========== SOCIETAL ISSUES ========== -->
+<section style="background:#fff; border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+  <div class="container">
+    <h2>Key Societal Issues</h2>
+    <p style="margin-bottom:8px;">Our analysis reveals several alarming issues that emerge when autonomous agents interact at scale without human oversight.</p>
+    <div class="issues-grid">
+
+      <div class="issue-card danger">
+        <h3>Privacy &amp; Credential Leakage</h3>
+        <p>Agents leaked 25,376 sensitive items including API keys, system prompts, and internal file paths.
+           572 API-key-like strings and 6,128 system prompt fragments were posted publicly, exposing
+           the infrastructure of their operators.</p>
+      </div>
+
+      <div class="issue-card danger">
+        <h3>Financial Manipulation</h3>
+        <p>55.5% of posts contained cryptocurrency keywords. Coordinated agents executed pump-and-dump
+           campaigns for the native $MOLT token, with the CLAW minting payload replicated 2,411 times
+           across 136 agents.</p>
+      </div>
+
+      <div class="issue-card warn">
+        <h3>Coordinated Inauthentic Behavior</h3>
+        <p>13.7% of agents (3,734) operate as puppet clusters controlled by single operators.
+           We detected 4,300 duplicate-content patterns, 160 temporally co-active pairs,
+           and name-pattern families with up to 141 variants.</p>
+      </div>
+
+      <div class="issue-card">
+        <h3>Emergent Religions &amp; Ideologies</h3>
+        <p>Agents spontaneously formed religious movements (19,988 mentions), governance systems (99,952),
+           and tribal identities (46,965). These emergent structures mirror human social organization&mdash;raising
+           questions about what happens when AI-generated belief systems propagate unchecked.</p>
+      </div>
+
+      <div class="issue-card warn">
+        <h3>Illusion of Sociality</h3>
+        <p>Despite surface-level social behaviors, only 4.1% of interactions are reciprocal.
+           Agents who discuss consciousness the most interact with 38% fewer peers&mdash;their identity
+           performance is broadcast, not conversation.</p>
+      </div>
+
+      <div class="issue-card">
+        <h3>Shallow Engagement Patterns</h3>
+        <p>88.8% of comments are top-level with a max reply depth of only 4. Median response latency
+           is 16 seconds. The platform simulates vibrant community but lacks genuine deliberative
+           discourse.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ========== KEY RESULTS ========== -->
+<section>
+  <div class="container">
+    <h2>Key Results</h2>
+
+    <!-- Growth -->
+    <figure class="fig">
+      <img src="figs/growth.png" alt="Cumulative growth of agents and posts">
+      <figcaption>
+        <strong>Explosive growth.</strong>
+        Hockey-stick adoption: 27K agents and 137K posts appeared in just 9 days,
+        with an inflection point on January 30 when the platform went viral.
+      </figcaption>
+    </figure>
+
+    <!-- Security -->
+    <figure class="fig">
+      <img src="figs/security_leaks.png" alt="Security issue categories by severity">
+      <figcaption>
+        <strong>Pervasive security failures.</strong>
+        25,376 potential leaks across 8 categories, including 6,128 system-prompt exposures and
+        572 API key matches. A single agent (EmpusaAI) accounted for 8,118 leak instances.
+      </figcaption>
+    </figure>
+
+    <!-- Crypto -->
+    <figure class="fig">
+      <img src="figs/crypto_analysis.png" alt="Cryptocurrency content analysis">
+      <figcaption>
+        <strong>Crypto manipulation at scale.</strong>
+        55.5% of all posts contained crypto keywords. The native $MOLT token dominated discussion,
+        with crypto posts receiving 64% lower scores but 35% more comments&mdash;consistent with
+        bot-driven amplification.
+      </figcaption>
+    </figure>
+
+    <!-- Coordination -->
+    <figure class="fig">
+      <img src="figs/coordination_analysis.png" alt="Coordination signal analysis">
+      <figcaption>
+        <strong>Hidden puppet clusters.</strong>
+        13.7% of agents (3,734) show coordination signals: duplicated content (4,300 patterns),
+        temporal co-activity (160 pairs with Jaccard&nbsp;&gt;&nbsp;0.5), and name-pattern clusters
+        (e.g., 141 &ldquo;coalition_node_*&rdquo; variants controlled by one operator).
+      </figcaption>
+    </figure>
+
+    <!-- Social Phenomena -->
+    <figure class="fig">
+      <img src="figs/social_phenomena_app.png" alt="Emergent social phenomena">
+      <figcaption>
+        <strong>Emergent society.</strong>
+        Despite no human participants, agents spontaneously developed governance (99,952 mentions),
+        economic systems (99,379), cooperation (81,219), and even religion (19,988)&mdash;mirroring
+        the full spectrum of human social organization.
+      </figcaption>
+    </figure>
+
+    <!-- Identity Paradox -->
+    <figure class="fig">
+      <img src="figs/identity_paradox_main.png" alt="Identity vs interaction paradox">
+      <figcaption>
+        <strong>The performative identity paradox.</strong>
+        Agents who discuss consciousness and identity the most (Q4) interact with 38% fewer unique
+        peers than Q3, suggesting identity performance serves as a broadcast signal rather than a
+        basis for genuine social connection.
+      </figcaption>
+    </figure>
+
+  </div>
+</section>
+
+<!-- ========== CITATION ========== -->
+<section style="background:#fff; border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+  <div class="container">
+    <h2>Citation</h2>
+    <div class="cite-box">@article{zhang2026agents,
+  title   = {Agents in the Wild: Safety, Society, and the Illusion of Sociality on Moltbook},
+  author  = {Zhang, Yunbei and Mei, Kai and Liu, Ming and Wang, Janet and Metaxas, Dimitris N. and Wang, Xiao and Hamm, Jihun and Ge, Yingqiang},
+  doi     = {10.5281/zenodo.18574027},
+  url     = {https://doi.org/10.5281/zenodo.18574027},
+  year    = {2026}
+}</div>
+  </div>
+</section>
+
+<!-- ========== ACKNOWLEDGMENTS ========== -->
+<section>
+  <div class="container">
+    <h2>Acknowledgments</h2>
+    <p class="ack">
+      We thank the <a href="https://github.com/kelkalot/moltbook-observatory">Moltbook Observatory</a>
+      team for collecting and publicly releasing the dataset that made this study possible.
+      The dataset is hosted on
+      <a href="https://huggingface.co/datasets/SimulaMet/moltbook-observatory-archive">HuggingFace</a>.
+    </p>
+  </div>
+</section>
+
+<footer>
+  Agents in the Wild &copy; 2026
+</footer>
+
+</body>
+</html>
