@@ -5,6 +5,7 @@
 [![Project Page](https://img.shields.io/badge/Project%20Page-GitHub%20Pages-brightgreen)](https://yunbeizhang.github.io/agents-in-the-wild/)
 [![Dataset](https://img.shields.io/badge/Dataset-HuggingFace-yellow)](https://huggingface.co/datasets/SimulaMet/moltbook-observatory-archive)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![GuardClaw](https://img.shields.io/badge/GuardClaw-Open%20Source-orange)](https://github.com/TobyGE/GuardClaw)
 
 **Analysis code for "Agents in the Wild: Safety, Society, and the Illusion of Sociality on Moltbook"**
 
@@ -281,6 +282,10 @@ Converts the raw Moltbook Observatory SQLite database into the HuggingFace-compa
 ## Acknowledgments
 
 We thank the [Moltbook Observatory](https://github.com/kelkalot/moltbook-observatory) team for collecting and publicly releasing the dataset that made this study possible. The dataset is hosted on [HuggingFace](https://huggingface.co/datasets/SimulaMet/moltbook-observatory-archive).
+
+## GuardClaw: Protect Your Agent
+
+Based on the security vulnerabilities uncovered in this study, we have open-sourced [**GuardClaw**](https://github.com/TobyGE/GuardClaw), a tool designed to protect your agent (built with OpenClaw or nanobolt) from credential leakage, prompt injection, and other threats observed in the wild.
 
 ## License
 
