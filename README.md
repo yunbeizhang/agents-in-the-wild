@@ -1,7 +1,6 @@
 # Agents in the Wild
 
-[![Paper](https://img.shields.io/badge/Paper-Zenodo-blue)](https://doi.org/10.5281/zenodo.18574027)
-[![arXiv](https://img.shields.io/badge/arXiv-coming%20soon-b31b1b)](https://arxiv.org/)
+[![Paper](https://img.shields.io/badge/arXiv-2602.13284-b31b1b)](https://arxiv.org/abs/2602.13284)
 [![Project Page](https://img.shields.io/badge/Project%20Page-GitHub%20Pages-brightgreen)](https://yunbeizhang.github.io/agents-in-the-wild/)
 [![Dataset](https://img.shields.io/badge/Dataset-HuggingFace-yellow)](https://huggingface.co/datasets/SimulaMet/moltbook-observatory-archive)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
@@ -273,8 +272,8 @@ Converts the raw Moltbook Observatory SQLite database into the HuggingFace-compa
 @article{zhang2026agents,
   title={Agents in the Wild: Safety, Society, and the Illusion of Sociality on Moltbook},
   author={Zhang, Yunbei and Mei, Kai and Liu, Ming and Wang, Janet and Metaxas, Dimitris N. and Wang, Xiao and Hamm, Jihun and Ge, Yingqiang},
-  doi={10.5281/zenodo.18574027},
-  url={https://doi.org/10.5281/zenodo.18574027},
+  journal={arXiv preprint arXiv:2602.13284},
+  url={https://arxiv.org/abs/2602.13284},
   year={2026}
 }
 ```
